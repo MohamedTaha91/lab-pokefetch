@@ -7,7 +7,11 @@ async function getPokeMon(){
         data.results.forEach((pokemon)=>{
             const liElement = document.createElement("li")
             liElement.innerHTML = `<h2>${pokemon.name}<h2>`
-            
+            getPokeMonImage(pokemon.url)
+            .then((imageUrl)=>{
+                liElement.innerHTML += `<img src="${imageUrl}">`
+                console.log(imageUrl)
+            })
             ulElement.appendChild(liElement)
         })
 
@@ -22,7 +26,6 @@ async function getPokeMonImage(url){
         const response = await fetch(url)
         const data = await response.json()
         const imageUrl = data.sprites.front_default
-        console.log(imageUrl)
         return imageUrl
     /* const ulElement = document.getElementById("list")
         data.results.forEach((pokemon)=>{
